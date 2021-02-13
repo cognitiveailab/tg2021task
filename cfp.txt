@@ -1,0 +1,77 @@
+Call for Participation:
+TextGraphs-14 Shared Task on Explanation Regeneration
+https://competitions.codalab.org/competitions/23615
+
+We invite participation in the 2nd Shared Task on Explanation Regeneration
+associated with the 14th Workshop on Graph-Based Natural Language Processing
+(TextGraphs 2020). 
+All systems participating in the shared task will be invited to submit system description papers. 
+Each system description paper will be peer-reviewed by (two) other participating teams and will be 
+presented as a poster at the main workshop. 
+
+Overview
+========
+
+This shared task focuses on explanation reconstruction, a stepping-stone
+towards general multi-hop inference over language. In particular, the inputs
+to this task consist of questions and their correct answers. Participating
+systems must extract and rank explanation sentences from a provided
+structured knowledge base such that the top-ranked sentences provide
+a complete explanation for the given answer.
+
+While large language models (BERT, XLNet) achieved the highest performance in
+the 2019 shared task, substantially advancing the state-of-the-art over
+previous methods, absolute performance remains modest, highlighting the 
+difficulty of generating detailed explanations through multi-hop reasoning.
+
+This 2020 instantiation of the shared task includes approximately three times
+more data than the original 2019 shared task. Submissions that evaluate
+how well existing models designed on 2-hop multihop question answering datasets 
+(e.g. HotPotQA, QASC, etc) perform at many-fact multi-hop explanation regeneration
+are encouraged. 
+
+
+Example
+=======
+
+For example, for the question: "Which of the following is an example of an
+organism taking in nutrients?" with the correct answer: "a girl eating an
+apple", an ideal system would rank the following explanatory statements
+at the top of its extracted sentences:
+
+1. A girl means a human girl.
+2. Humans are living organisms.
+3. Eating is when an organism takes in nutrients in the form of food.
+4. Fruits are kinds of foods.
+5. An apple is a kind of fruit.
+
+
+Important Dates
+===============
+
+2020-03-06: Training data release
+2020-04-06: Test data release; Evaluation start
+2020-05-06: Evaluation end
+2020-05-20: System description paper deadline
+2020-06-10: Deadline for reviews of system description papers
+2020-06-24: Author notifications
+2020-07-11: Camera-ready description paper deadline
+2020-09-14: TextGraphs-14 workshop
+
+
+Data
+====
+
+The data used in this shared task contains approximately 5,100 questions drawn 
+from the AI2 Reasoning Challenge (ARC) dataset (Clark et al., 2018), together 
+with explanation sentences for their correct answers drawn from the 
+WorldTree V2 corpus (Xie et al., 2020, Jansen et al., 2018).
+
+The knowledge base supporting these questions contains approximately 9,000 facts.
+To encourage a variety of solving methods, the knowledge base is available both as
+plain-text sentences (unstructured) as well as semi-structured tables. Facts are a 
+combination of scientific knowledge as well as common-sense/world knowledge.
+
+Please see the shared task website for more details:
+https://competitions.codalab.org/competitions/23615
+https://github.com/cognitiveailab/tg2020task
