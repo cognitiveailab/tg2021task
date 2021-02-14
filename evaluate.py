@@ -5,7 +5,7 @@ from collections import OrderedDict
 from typing import Dict, List
 
 import pandas as pd
-import ujson as json
+import json
 
 from evaluation import ExplanationEvaluate
 
