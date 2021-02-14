@@ -35,7 +35,7 @@ def process_teacher_pred(
     pred: Dict[str, List[str]] = OrderedDict()
 
     for id, df_explanations in df.groupby("question"):
-        pred[id.lower()] = list(
+        pred[id] = list(
             OrderedDict.fromkeys(df_explanations["explanation"].str.lower())
         )
 

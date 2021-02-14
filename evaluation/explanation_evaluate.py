@@ -18,7 +18,7 @@ class ExplanationEvaluate:
         gold: Dict[str, List[Dict[str, float]]],
         predicted: Dict[str, List[str]],
         rating_threshold: int,
-    ):
+    ) -> float:
         """Calculate the Mean Average NDCG score
 
         Args:
@@ -53,7 +53,7 @@ class ExplanationEvaluate:
         gold: List[Dict[str, float]],
         predicted: List[Dict[str, float]],
         rating_threshold: int,
-    ):
+    ) -> float:
         """Calculate NDCG of one instance
 
         Args:
@@ -93,7 +93,7 @@ class ExplanationEvaluate:
         predicted: Dict[str, List[str]],
         k: int,
         rating_threshold: int,
-    ):
+    ) -> float:
         """Calculate the Precision@K
 
         Args:
