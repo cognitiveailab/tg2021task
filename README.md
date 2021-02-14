@@ -39,7 +39,7 @@ $ pip install -r requirements.txt
 ```
 
 ```shell
-$ ./evaluate.py --gold teacher_ratings.dev.json --prediciton predict.txt
+$ ./evaluate.py --gold teacher_ratings.dev.json --predicton predict.txt
 ```
 
 In order to prepare a submission file for CodaLab, create a ZIP file containing your `predict.txt` for the *test* dataset, cf. `make predict-tfidf-test.zip`.
