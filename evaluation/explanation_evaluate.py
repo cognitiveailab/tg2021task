@@ -4,7 +4,6 @@ from collections import OrderedDict
 from typing import Dict, List, Tuple
 
 import numpy as np
-from sklearn.metrics import ndcg_score
 from tqdm import tqdm
 
 from .ndcg import ndcg as ndcg_eval
@@ -15,9 +14,9 @@ class ExplanationEvaluate:
 
     @staticmethod
     def mean_average_ndcg(
-        gold: Dict[str, List[Dict[str, float]]],
-        predicted: Dict[str, List[str]],
-        rating_threshold: int,
+            gold: Dict[str, List[Dict[str, float]]],
+            predicted: Dict[str, List[str]],
+            rating_threshold: int,
     ) -> float:
         """Calculate the Mean Average NDCG score
 
@@ -48,10 +47,10 @@ class ExplanationEvaluate:
 
     @staticmethod
     def ndcg(
-        q_id: str,
-        gold: List[Dict[str, float]],
-        predicted: List[Dict[str, float]],
-        rating_threshold: int,
+            q_id: str,
+            gold: List[Dict[str, float]],
+            predicted: List[Dict[str, float]],
+            rating_threshold: int,
     ) -> float:
         """Calculate NDCG of one instance
 
@@ -88,10 +87,10 @@ class ExplanationEvaluate:
 
     @staticmethod
     def precision_at_k(
-        gold: Dict[str, List[Dict[str, float]]],
-        predicted: Dict[str, List[str]],
-        k: int,
-        rating_threshold: int,
+            gold: Dict[str, List[Dict[str, float]]],
+            predicted: Dict[str, List[str]],
+            k: int,
+            rating_threshold: int,
     ) -> float:
         """Calculate the Precision@K
 
