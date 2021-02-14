@@ -3,6 +3,8 @@ TextGraphs-15 Shared Task on Multi-Hop Inference Explanation Regeneration
 
 Multi-hop inference is the task of combining more than one piece of information to solve an inference task, such as question answering.
 
+![Tests](https://github.com/cognitiveailab/tg2021task/workflows/Tests/badge.svg?branch=main)
+
 ![Example explanation graph](images/example-girl-eating-apple.jpg)
 
 ## Important Dates
