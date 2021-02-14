@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 
+import logging
 from collections import OrderedDict
 from typing import Dict, List
 
-import click
 import pandas as pd
 import ujson as json
-from loguru import logger
 
 from evaluation import ExplanationEvaluate
+
+logging.basicConfig(level=logging.DEBUG)
 
 
 def process_teacher_gold(teacher_preds: List) -> Dict[str, Dict[str, float]]:
@@ -42,20 +43,25 @@ def process_teacher_pred(
     return pred
 
 
-@click.command()
-@click.option("--prediction", help="Prediction file")
-@click.option("--gold", help="Gold teacher ratings")
-def evaluate(prediction, gold):
-    preds = process_teacher_pred(prediction)
-    with open(gold) as f:
-        gold_explanations = process_teacher_gold(json.load(f)["rankingProblems"])
+def evaluate():
+    import argparse
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--gold", type=argparse.FileType("r", encoding="UTF-8"), required=True
+    )
+    parser.add_argument("pred", type=argparse.FileType("r", encoding="UTF-8"))
+    args = parser.parse_args()
+
+    preds = process_teacher_pred(args.pred)
+    gold_explanations = process_teacher_gold(json.load(args.gold)["rankingProblems"])
 
     rating_threshold = 0
 
     ndcg_score = ExplanationEvaluate.mean_average_ndcg(
         gold_explanations, preds, rating_threshold
     )
-    logger.success(f"Mean NDCG Score : {ndcg_score}")
+    logging.info(f"Mean NDCG Score : {ndcg_score}")
 
 
 if __name__ == "__main__":

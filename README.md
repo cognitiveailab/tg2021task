@@ -34,12 +34,8 @@ $ ./baseline_tfidf.py tables questions.dev.tsv > predict.txt
 
 The format of the `predict.txt` file is `questionID<TAB>explanationID` without header; the order is important. When [tqdm](https://github.com/tqdm/tqdm) is installed, `baseline_tfidf.py` will show a nicely-looking progress bar.
 
-```
-$ pip install -r requirements.txt
-```
-
 ```shell
-$ ./evaluate.py --gold teacher_ratings.dev.json --predicton predict.txt
+$ ./evaluate.py --gold teacher_ratings.dev.json predict.txt
 ```
 
 In order to prepare a submission file for CodaLab, create a ZIP file containing your `predict.txt` for the *test* dataset, cf. `make predict-tfidf-test.zip`.

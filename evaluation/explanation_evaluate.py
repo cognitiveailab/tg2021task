@@ -1,9 +1,9 @@
+import logging
 import warnings
 from collections import OrderedDict
 from typing import Dict, List, Tuple
 
 import numpy as np
-from loguru import logger
 from sklearn.metrics import ndcg_score
 from tqdm import tqdm
 
@@ -25,9 +25,8 @@ class ExplanationEvaluate:
             gold (Dict[str,List[Tuple[float,str]]]): Gold explanations with Question_ID: [{fact_id_1: score_1}, {fact_id_2}:score]
             predicted (Dict[str,List[str]]): Predicted explanations with Question_ID: [fact_id_1, fact_id_2]
         """
-        logger.info("Calculating Mean Average NDCG")
         if len(gold) == 0:
-            logger.error(
+            logging.error(
                 "Empty gold labels. Please verify if you have provided the correct file"
             )
             return -1
@@ -102,14 +101,10 @@ class ExplanationEvaluate:
             k:int the parameter k for the precision
             rating: the rating category to consider for the precision
         """
-        logger.info("Calculating Precision@K")
-
         average_precision = 0
-        i = 0
-
         for q_id in gold:
             if not q_id in predicted:
-                logger.warning(f"Missing {q_id} in prediction")
+                logging.warning(f"Missing {q_id} in prediction")
                 continue
             predictions = predicted[q_id][:k]
             tp = 0
@@ -124,4 +119,4 @@ class ExplanationEvaluate:
 
         average_precision /= len(gold)
 
-        logger.success(f"Precision@{k}: {average_precision}")
+        return average_precision
