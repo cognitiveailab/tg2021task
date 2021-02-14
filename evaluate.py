@@ -1,120 +1,62 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
-import sys
-import warnings
 from collections import OrderedDict
-from functools import partial
-from typing import List, Dict, Callable, Optional
+from typing import Dict, List
 
+import click
 import pandas as pd
+import ujson as json
+from loguru import logger
+
+from evaluation import ExplanationEvaluate
 
 
-class IncompletePredictionWarning(UserWarning):
-    pass
+def process_teacher_gold(teacher_preds: List) -> Dict[str, Dict[str, float]]:
+    return {
+        pred["qid".lower()]: {
+            data["uuid"]: data["relevance"] for data in pred["documents"]
+        }
+        for pred in teacher_preds
+    }
 
 
-def load_gold(filepath_or_buffer: str, sep: str = '\t') -> Dict[str, List[str]]:
-    df = pd.read_csv(filepath_or_buffer, sep=sep, dtype=str)
-
-    df = df[df['flags'].str.lower().isin(('success', 'ready'))]
-    df = df[['QuestionID', 'explanation']]
-    df.dropna(inplace=True)
-
-    df['QuestionID'] = df['QuestionID'].str.lower()
-    df['explanation'] = df['explanation'].str.lower()
-
-    gold: Dict[str, List[str]] = OrderedDict()
-
-    for _, row in df.iterrows():
-        gold[row['QuestionID']] = [uid for e in row['explanation'].split()
-                                   for uid, _ in (e.split('|', 1),)]
-
-    return gold
-
-
-def load_pred(filepath_or_buffer: str, sep: str = '\t') -> Dict[str, List[str]]:
-    df = pd.read_csv(filepath_or_buffer, sep=sep, names=('question', 'explanation'), dtype=str)
+def process_teacher_pred(
+    filepath_or_buffer: str, sep: str = "\t"
+) -> Dict[str, List[str]]:
+    df = pd.read_csv(
+        filepath_or_buffer, sep=sep, names=("question", "explanation"), dtype=str
+    )
 
     if any(df[field].isnull().all() for field in df.columns):
-        raise ValueError('invalid format of the prediction dataset, possibly the wrong separator')
+        raise ValueError(
+            "invalid format of the prediction dataset, possibly the wrong separator"
+        )
 
     pred: Dict[str, List[str]] = OrderedDict()
 
-    for id, df_explanations in df.groupby('question'):
-        pred[id.lower()] = list(OrderedDict.fromkeys(df_explanations['explanation'].str.lower()))
+    for id, df_explanations in df.groupby("question"):
+        pred[id.lower()] = list(
+            OrderedDict.fromkeys(df_explanations["explanation"].str.lower())
+        )
 
     return pred
 
 
-def average_precision_score(gold: List[str], pred: List[str],
-                            callback: Optional[Callable[[int, int], None]] = None) -> float:
-    if not gold or not pred:
-        return 0.
+@click.command()
+@click.option("--prediction", help="Prediction file")
+@click.option("--gold", help="Gold teacher ratings")
+def evaluate(prediction, gold):
+    preds = process_teacher_pred(prediction)
+    with open(gold) as f:
+        gold_explanations = process_teacher_gold(json.load(f)["rankingProblems"])
 
-    correct = 0
+    rating_threshold = 0
 
-    ap = 0.
-
-    true = set(gold)
-
-    for rank, element in enumerate(pred):
-        if element in true:
-            correct += 1
-
-            if callable(callback):
-                callback(correct, rank)
-
-            ap += correct / (rank + 1.)
-
-            true.remove(element)
-
-    if true:
-        warnings.warn('pred is missing gold: ' + ', '.join(true), IncompletePredictionWarning)
-
-    return ap / len(gold)
-
-
-def mean_average_precision_score(golds: Dict[str, List[str]], preds: Dict[str, List[str]],
-                                 callback: Optional[Callable[[str, float], None]] = None) -> float:
-    if not golds or not preds:
-        return 0.
-
-    sum_ap = 0.
-
-    for id, gold in golds.items():
-        if id in preds:
-            pred = preds[id]
-
-            score = average_precision_score(gold, pred)
-
-            if callable(callback):
-                callback(id, score)
-
-            sum_ap += score
-
-    return sum_ap / len(golds)
-
-
-def main():
-    import argparse
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--gold', type=argparse.FileType('r', encoding='UTF-8'), required=True)
-    parser.add_argument('pred', type=argparse.FileType('r', encoding='UTF-8'))
-    args = parser.parse_args()
-
-    gold, pred = load_gold(args.gold), load_pred(args.pred)
-
-    print('{:d} gold questions, {:d} predicted questions'.format(len(gold), len(pred)),
-          file=sys.stderr)
-
-    # callback is optional, here it is used to print intermediate results to STDERR
-    mean_ap = mean_average_precision_score(
-        gold, pred, callback=partial(print, file=sys.stderr)
+    ndcg_score = ExplanationEvaluate.mean_average_ndcg(
+        gold_explanations, preds, rating_threshold
     )
+    logger.success(f"Mean NDCG Score : {ndcg_score}")
 
-    print('MAP: ', mean_ap)
 
-
-if '__main__' == __name__:
-    main()
+if __name__ == "__main__":
+    evaluate()
