@@ -14,16 +14,16 @@ from tqdm import tqdm
 logging.basicConfig(level=logging.DEBUG)
 
 
-def process_teacher_gold(teacher_preds: List) -> Dict[str, Dict[str, float]]:
+def process_expert_gold(expert_preds: List) -> Dict[str, Dict[str, float]]:
     return {
         pred["qid".lower()]: {
             data["uuid"]: data["relevance"] for data in pred["documents"]
         }
-        for pred in teacher_preds
+        for pred in expert_preds
     }
 
 
-def process_teacher_pred(
+def process_expert_pred(
     filepath_or_buffer: str, sep: str = "\t"
 ) -> Dict[str, List[str]]:
     df = pd.read_csv(
@@ -55,8 +55,8 @@ def evaluate():
     parser.add_argument("pred", type=argparse.FileType("r", encoding="UTF-8"))
     args = parser.parse_args()
 
-    preds = process_teacher_pred(args.pred)
-    gold_explanations = process_teacher_gold(json.load(args.gold)["rankingProblems"])
+    preds = process_expert_pred(args.pred)
+    gold_explanations = process_expert_gold(json.load(args.gold)["rankingProblems"])
 
     rating_threshold = 0
 
@@ -110,7 +110,7 @@ def ndcg(
     """Calculate NDCG value for individual Question-Explanations Pair
 
     Args:
-        gold (Dict[str, float]): Gold teacher ratings
+        gold (Dict[str, float]): Gold expert ratings
         predicted (List[str]): List of predicted ids
         rating_threshold (int): Threshold of gold ratings to consider for NDCG calcuation
         alternate (bool, optional): True to use the alternate scoring (intended to place more emphasis on relevant results). Defaults to True.
