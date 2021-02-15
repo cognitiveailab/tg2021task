@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # NDCG scoring function adapted from: https://github.com/kmbnw/rank_metrics/blob/master/python/ndcg.py
 
+import json
 import logging
 import warnings
 from collections import OrderedDict
@@ -8,7 +9,6 @@ from typing import Dict, List
 
 import numpy as np
 import pandas as pd
-import ujson as json
 from tqdm import tqdm
 
 logging.basicConfig(level=logging.DEBUG)
