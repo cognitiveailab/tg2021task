@@ -193,3 +193,5 @@ samples/
 *.zip
 .noseids
 blub
+*.json
+predict-*.txt

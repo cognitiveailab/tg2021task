@@ -1,4 +1,4 @@
-WORLDTREE := tg2020task-dataset.zip
+WORLDTREE := tg2021task-wt-expert-ratings.initial.zip
 
 evaluate: predict-tfidf-dev.txt
 	./evaluate.py --gold=questions.dev.tsv $<
@@ -12,7 +12,7 @@ predict-tfidf-%.zip: predict-tfidf-%.txt
 	zip -j $@ $(TMP)/predict.txt
 	rm -rf $(TMP)
 
-predict-tfidf-%.txt: questions.%.tsv
+predict-tfidf-%.txt: wt-expert-ratings.train.json
 	./baseline_tfidf.py tables $< > $@
 
 dataset: $(WORLDTREE)
@@ -20,11 +20,14 @@ dataset: $(WORLDTREE)
 
 SHA256SUM := $(shell type -p sha256sum || echo shasum -a 256)
 
-$(WORLDTREE): worldtree_corpus.sha256
+$(WORLDTREE): tg2021task-practice.sha256
 	@echo 'Please note that this distribution is subject to the terms set in the license:'
 	@echo 'http://cognitiveai.org/explanationbank/'
 	curl -sL -o "$@" 'http://cognitiveai.org/dist/$(WORLDTREE)'
 	$(SHA256SUM) -c "$<"
+
+checksum:
+	$(SHA256SUM) "$(WORLDTREE)" > tg2021task-practice.sha256
 
 clean:
 	rm -fv predict*.txt predict*.zip
