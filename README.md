@@ -36,6 +36,8 @@ $ ./baseline_tfidf.py tables wt-expert-ratings.dev.json > predict.txt
 
 The format of the `predict.txt` file is `questionID<TAB>explanationID` without header; the order is important. When [tqdm](https://github.com/tqdm/tqdm) is installed, `baseline_tfidf.py` will show a nicely-looking progress bar.
 
+To compute the NDCG for the model, run the following command:
+
 ```shell
 $ ./evaluate.py --gold wt-expert-ratings.dev.json predict.txt
 ```
