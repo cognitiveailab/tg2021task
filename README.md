@@ -22,7 +22,7 @@ Dates are specified in the ISO&nbsp;8601 format.
 
 ## Baselines
 
-The shared task data distribution includes a baseline that uses a term frequency model (tf.idf) to rank how likely table row sentences are to be a part of a given explanation. The performance of this baseline on the development partition is 0.255 MAP.
+The shared task data distribution includes a baseline that uses a term frequency model (tf.idf) to rank how likely table row sentences are to be a part of a given explanation. The performance of this baseline on the development partition is 0.513 NDCG.
 
 ### Python
 
@@ -31,13 +31,20 @@ $ make dataset
 ```
 
 ```shell
-$ ./baseline_tfidf.py tables questions.dev.tsv > predict.txt
+$ ./baseline_tfidf.py tables wt-expert-ratings.dev.json > predict.txt
 ```
 
 The format of the `predict.txt` file is `questionID<TAB>explanationID` without header; the order is important. When [tqdm](https://github.com/tqdm/tqdm) is installed, `baseline_tfidf.py` will show a nicely-looking progress bar.
 
+To compute the NDCG for the model, run the following command:
+
 ```shell
-$ ./evaluate.py --gold expert_ratings.dev.json predict.txt
+$ ./evaluate.py --gold wt-expert-ratings.dev.json predict.txt
+```
+If you want to run the evaluation script without tqdm, adopt the following command:
+
+```shell
+$ ./evaluate.py --use_tqdm 0 --gold wt-expert-ratings.dev.json predict.txt
 ```
 
 In order to prepare a submission file for CodaLab, create a ZIP file containing your `predict.txt` for the *test* dataset, cf. `make predict-tfidf-test.zip`.

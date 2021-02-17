@@ -52,7 +52,8 @@ def evaluate():
     parser.add_argument(
         "--gold", type=argparse.FileType("r", encoding="UTF-8"), required=True
     )
-    parser.add_argument("pred", type=argparse.FileType("r", encoding="UTF-8"))
+    parser.add_argument("--use_tqdm", type = int, default=1)
+    parser.add_argument("pred", type=argparse.FileType("r", encoding="UTF-8")) 
     args = parser.parse_args()
 
     preds = process_expert_pred(args.pred)
@@ -60,7 +61,7 @@ def evaluate():
 
     rating_threshold = 0
 
-    ndcg_score = mean_average_ndcg(gold_explanations, preds, rating_threshold)
+    ndcg_score = mean_average_ndcg(gold_explanations, preds, rating_threshold, args.use_tqdm)
     logging.info(f"Mean NDCG Score : {ndcg_score}")
 
 
@@ -68,6 +69,7 @@ def mean_average_ndcg(
     gold: Dict[str, Dict[str, float]],
     predicted: Dict[str, List[str]],
     rating_threshold: int,
+    use_tqdm:bool
 ) -> float:
     """Calculate the Mean Average NDCG
 
@@ -86,18 +88,33 @@ def mean_average_ndcg(
         )
         return -1
 
-    mean_average_ndcg = np.average(
-        [
-            ndcg(
-                gold[q_id],
-                list(OrderedDict.fromkeys(predicted[q_id]))
-                if q_id in predicted
-                else [],
-                rating_threshold,
-            )
-            for q_id in tqdm(gold, "Evaluting NDCG")
-        ]
-    )
+    if use_tqdm == 1:
+        mean_average_ndcg = np.average(
+            [
+                ndcg(
+                    gold[q_id],
+                    list(OrderedDict.fromkeys(predicted[q_id]))
+                    if q_id in predicted
+                    else [],
+                    rating_threshold,
+                )
+                for q_id in tqdm(gold, "evaluating")
+            ]
+        )
+    else:
+        mean_average_ndcg = np.average(
+            [
+                ndcg(
+                    gold[q_id],
+                    list(OrderedDict.fromkeys(predicted[q_id]))
+                    if q_id in predicted
+                    else [],
+                    rating_threshold,
+                )
+                for q_id in gold
+            ]
+        )
+
     return mean_average_ndcg
 
 
