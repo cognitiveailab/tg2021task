@@ -4,10 +4,10 @@ https://competitions.codalab.org/competitions/**TODO**
 
 We invite participation in the 3rd Shared Task on Explanation Regeneration
 associated with the 15th Workshop on Graph-Based Natural Language Processing
-(TextGraphs 2021). 
-All systems participating in the shared task will be invited to submit system description papers. 
-Each system description paper will be peer-reviewed by (two) other participating teams and will be 
-presented as a poster at the main workshop. 
+(TextGraphs 2021).
+All systems participating in the shared task will be invited to submit system description papers.
+Each system description paper will be peer-reviewed by (two) other participating teams and will be
+presented as a poster at the main workshop.
 
 Overview
 ========
@@ -22,18 +22,18 @@ scientific and common-sense/world knowledge with compositional inference.
 
 While large language models (BERT, XLNet) achieved the highest performance in
 the 2019 and 2020 shared tasks, substantially advancing the state-of-the-art over
-previous methods, absolute performance remains modest, highlighting the 
+previous methods, absolute performance remains modest, highlighting the
 difficulty of generating detailed explanations through multi-hop reasoning.
 
-NEW FOR 2021: 
+NEW FOR 2021:
 Many-hop multi-hop inference is challenging because there are often multiple
-ways of assembling a good explanation for a given question.  This 2021 
-instantiation of the shared task focuses on the theme of determining relevance 
+ways of assembling a good explanation for a given question.  This 2021
+instantiation of the shared task focuses on the theme of determining relevance
 versus completeness in large multi-hop explanations.  To this end, it includes
-a very large dataset of approximately 250,000 expert relevancy ratings that 
-augment the 2020 shared task data. Submissions that evaluate how well existing 
-models designed on 2-hop multihop question answering datasets (e.g. HotPotQA, 
-QASC, etc) perform at many-fact multi-hop explanation regeneration are encouraged. 
+a very large dataset of approximately 250,000 expert relevancy ratings that
+augment the 2020 shared task data. Submissions that evaluate how well existing
+models designed on 2-hop multihop question answering datasets (e.g. HotPotQA,
+QASC, etc) perform at many-fact multi-hop explanation regeneration are encouraged.
 
 
 Example
@@ -60,16 +60,16 @@ Important Dates
 Data
 ====
 
-The data used in this shared task contains approximately 5,100 questions drawn 
-from the AI2 Reasoning Challenge (ARC) dataset (Clark et al., 2018), together 
-with explanation sentences for their correct answers drawn from the 
-WorldTree V2 corpus (Xie et al., 2020, Jansen et al., 2018).  For 2021, this 
+The data used in this shared task contains approximately 5,100 questions drawn
+from the AI2 Reasoning Challenge (ARC) dataset (Clark et al., 2018), together
+with explanation sentences for their correct answers drawn from the
+WorldTree V2 corpus (Xie et al., 2020, Jansen et al., 2018).  For 2021, this
 has been augmented with a new set of approximately 250k expert-generated relevancy
-ratings. 
+ratings.
 
 The knowledge base supporting these questions contains approximately 9,000 facts.
 To encourage a variety of solving methods, the knowledge base is available both as
-plain-text sentences (unstructured) as well as semi-structured tables. Facts are a 
+plain-text sentences (unstructured) as well as semi-structured tables. Facts are a
 combination of scientific knowledge as well as common-sense/world knowledge.
 
 Please see the shared task website for more details:

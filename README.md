@@ -9,11 +9,11 @@ Multi-hop inference is the task of combining more than one piece of information 
 
 ## Important Dates
 
-* 2021-MM-DD: Training data release
-* 2021-MM-DD: Test data release; Evaluation start
-* 2021-MM-DD: Evaluation end
-* 2021-MM-DD: System description paper deadline
-* 2021-MM-DD: Deadline for reviews of system description papers
+* 2021-02-15: Training data release
+* 2021-03-10: Test data release; Evaluation start
+* 2021-03-24: Evaluation end
+* 2021-04-01: System description paper deadline
+* 2021-04-13: Deadline for reviews of system description papers
 * 2021-04-15: Author notifications
 * 2021-04-26: Camera-ready description paper deadline
 * 2021-06-11: [TextGraphs-15 workshop](https://sites.google.com/view/textgraphs2021)
@@ -55,7 +55,7 @@ Please submit your solutions via CodaLab: <https://competitions.codalab.org/comp
 
 ## Contacts
 
-This shared task is organized within the 14th workshop on graph-based natural language processing, TextGraphs-15: <https://sites.google.com/view/textgraphs2021>.
+This shared task is organized within the 15th workshop on graph-based natural language processing, TextGraphs-15: <https://sites.google.com/view/textgraphs2021>.
 
 We welcome questions and answers on the shared task on CodaLab Forums: <https://competitions.codalab.org/forums/20311/>.
 
@@ -63,7 +63,7 @@ To contact the task organizers directly, please send an email to [textgraphsoc@g
 
 ## Terms and Conditions
 
-By submitting results to this competition, you consent to the public release of your scores at the TextGraph-14 workshop and in the associated proceedings, at the task organizers' discretion. Scores may include, but are not limited to, automatic and manual quantitative judgements, qualitative judgements, and such other metrics as the task organizers see fit. You accept that the ultimate decision of metric choice and score value is that of the task organizers.
+By submitting results to this competition, you consent to the public release of your scores at the TextGraph-15 workshop and in the associated proceedings, at the task organizers' discretion. Scores may include, but are not limited to, automatic and manual quantitative judgements, qualitative judgements, and such other metrics as the task organizers see fit. You accept that the ultimate decision of metric choice and score value is that of the task organizers.
 
 You further agree that the task organizers are under no obligation to release scores and that scores may be withheld if it is the task organizers' judgement that the submission was incomplete, erroneous, deceptive, or violated the letter or spirit of the competition's rules. Inclusion of a submission's scores is not an endorsement of a team or individual's submission, system, or science.
 
