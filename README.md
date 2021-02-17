@@ -31,13 +31,18 @@ $ make dataset
 ```
 
 ```shell
-$ ./baseline_tfidf.py tables questions.dev.tsv > predict.txt
+$ ./baseline_tfidf.py tables wt-expert-ratings.dev.json > predict.txt
 ```
 
 The format of the `predict.txt` file is `questionID<TAB>explanationID` without header; the order is important. When [tqdm](https://github.com/tqdm/tqdm) is installed, `baseline_tfidf.py` will show a nicely-looking progress bar.
 
 ```shell
-$ ./evaluate.py --gold expert_ratings.dev.json predict.txt
+$ ./evaluate.py --gold wt-expert-ratings.dev.json predict.txt
+```
+If you want to run the evaluation script without tqdm, adopt the following command:
+
+```shell
+$ ./evaluate.py --use_tqdm 0 --gold wt-expert-ratings.dev.json predict.txt
 ```
 
 In order to prepare a submission file for CodaLab, create a ZIP file containing your `predict.txt` for the *test* dataset, cf. `make predict-tfidf-test.zip`.
