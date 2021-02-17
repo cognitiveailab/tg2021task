@@ -1,13 +1,13 @@
 Call for Participation:
 TextGraphs-15: Third Shared Task on Explanation Regeneration
-https://competitions.codalab.org/competitions/**TODO**
+https://competitions.codalab.org/competitions/29228
 
 We invite participation in the 3rd Shared Task on Explanation Regeneration
 associated with the 15th Workshop on Graph-Based Natural Language Processing
 (TextGraphs 2021).
 All systems participating in the shared task will be invited to submit system description papers.
 Each system description paper will be peer-reviewed by (two) other participating teams and will be
-presented as a poster at the main workshop.
+presented as a poster at the main workshop: https://sites.google.com/view/textgraphs2021.
 
 Overview
 ========
@@ -54,8 +54,14 @@ at the top of its extracted sentences:
 Important Dates
 ===============
 
-**TODO**
-
+* 2021-02-15: Training data release
+* 2021-03-10: Test data release; Evaluation start
+* 2021-03-24: Evaluation end
+* 2021-04-01: System description paper deadline
+* 2021-04-13: Deadline for reviews of system description papers
+* 2021-04-15: Author notifications
+* 2021-04-26: Camera-ready description paper deadline
+* 2021-06-11: TextGraphs-15 workshop
 
 Data
 ====
@@ -73,5 +79,5 @@ plain-text sentences (unstructured) as well as semi-structured tables. Facts are
 combination of scientific knowledge as well as common-sense/world knowledge.
 
 Please see the shared task website for more details:
-https://competitions.codalab.org/competitions/**TODO**
+https://competitions.codalab.org/competitions/29228
 https://github.com/cognitiveailab/tg2021task
