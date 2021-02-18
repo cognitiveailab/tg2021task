@@ -57,7 +57,7 @@ def evaluate():
     parser.add_argument(
         "--gold", type=argparse.FileType("r", encoding="UTF-8"), required=True
     )
-    parser.add_argument("--tqdm", action="store_true")
+    parser.add_argument("--no-tqdm", action="store_false", dest="tqdm")
     parser.add_argument("pred", type=argparse.FileType("r", encoding="UTF-8")) 
     args = parser.parse_args()
 
