@@ -5,11 +5,16 @@ import json
 import logging
 import warnings
 from collections import OrderedDict
-from typing import Dict, List
+from typing import Dict, List, Iterable
 
 import numpy as np
 import pandas as pd
-from tqdm import tqdm
+
+try:
+    from tqdm import tqdm
+except ImportError:
+    def tqdm(iterable: Iterable, **kwargs) -> Iterable:
+        return iterable
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -52,7 +57,7 @@ def evaluate():
     parser.add_argument(
         "--gold", type=argparse.FileType("r", encoding="UTF-8"), required=True
     )
-    parser.add_argument("--use_tqdm", type = int, default=1)
+    parser.add_argument("--tqdm", action="store_true")
     parser.add_argument("pred", type=argparse.FileType("r", encoding="UTF-8")) 
     args = parser.parse_args()
 
@@ -61,7 +66,7 @@ def evaluate():
 
     rating_threshold = 0
 
-    ndcg_score = mean_average_ndcg(gold_explanations, preds, rating_threshold, args.use_tqdm)
+    ndcg_score = mean_average_ndcg(gold_explanations, preds, rating_threshold, args.tqdm)
     logging.info(f"Mean NDCG Score : {ndcg_score}")
 
 
@@ -69,7 +74,7 @@ def mean_average_ndcg(
     gold: Dict[str, Dict[str, float]],
     predicted: Dict[str, List[str]],
     rating_threshold: int,
-    use_tqdm:bool
+    use_tqdm: bool
 ) -> float:
     """Calculate the Mean Average NDCG
 
@@ -88,7 +93,7 @@ def mean_average_ndcg(
         )
         return -1
 
-    if use_tqdm == 1:
+    if use_tqdm:
         mean_average_ndcg = np.average(
             [
                 ndcg(
