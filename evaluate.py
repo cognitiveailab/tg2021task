@@ -163,7 +163,10 @@ def ndcg(
         padded = np.zeros(10 ** 6)
         for index, g_id in enumerate(missing_ids):
             padded[index] = gold[g_id]
-        relevance = np.concatenate((relevance, np.flip(padded)), axis=0)
+
+        # np.flip() accepts axis=None only since 1.15,
+        # but we have to support older versions
+        relevance = np.concatenate((relevance, np.flip(padded, axis=tuple(range(len(padded.shape))))), axis=0)
 
     nranks = len(relevance)
 
