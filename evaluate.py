@@ -50,7 +50,7 @@ def process_expert_pred(
     return pred
 
 
-def evaluate():
+def main():
     import argparse
 
     parser = argparse.ArgumentParser()
@@ -67,7 +67,7 @@ def evaluate():
     rating_threshold = 0
 
     ndcg_score = mean_average_ndcg(gold_explanations, preds, rating_threshold, args.tqdm)
-    logging.info(f"Mean NDCG Score : {ndcg_score}")
+    print(f"Mean NDCG Score : {ndcg_score}")
 
 
 def mean_average_ndcg(
@@ -234,4 +234,4 @@ def idcg(relevance: np.array, alternate: bool = True) -> float:
 
 
 if __name__ == "__main__":
-    evaluate()
+    main()
