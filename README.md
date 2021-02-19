@@ -37,13 +37,15 @@ Submissions using a variety of methods (graph-based or otherwise) are encouraged
 Dates are specified in the ISO&nbsp;8601 format.
 
 ## Data
-The data used in this shared task contains approximately 5,100 science exam questions drawn from the AI2 Reasoning Challenge (ARC) dataset ([Clark et al., 2018](https://allenai.org/data/arc)), together with explanation sentences for their correct answers drawn from the WorldTree V2.1 corpus ([Xie et al., 2020](https://www.aclweb.org/anthology/2020.lrec-1.671/), [Jansen et al., 2018](https://www.aclweb.org/anthology/L18-1433/)).  For 2021, this has been augmented with a new set of approximately 250k pre-release expert-generated relevancy ratings.
+The data used in this shared task contains approximately 5,100 science exam questions drawn from the AI2 Reasoning Challenge (ARC) dataset ([Clark et al., 2018](https://allenai.org/data/arc)), together with multi-fact explanations  for their correct answers drawn from the WorldTree V2.1 explanation corpus ([Xie et al., 2020](https://www.aclweb.org/anthology/2020.lrec-1.671/), [Jansen et al., 2018](https://www.aclweb.org/anthology/L18-1433/)).  For 2021, this has been augmented with a new set of approximately 250k pre-release expert-generated relevancy ratings.
 
-The knowledge base supporting these questions contains approximately 9,000 facts. To encourage a variety of solving methods, the knowledge base is available both as plain-text sentences (unstructured) as well as semi-structured tables. Facts are a combination of scientific knowledge as well as common-sense/world knowledge.
+The knowledge base supporting these questions and their explanations contains approximately 9,000 facts. To encourage a variety of solving methods, the knowledge base is available both as plain-text sentences (unstructured) as well as semi-structured tables. Facts are a combination of scientific knowledge as well as common-sense/world knowledge.
 
 The full dataset (WorldTree V2.1 + Relevancy Ratings) can be downloaded at the following links:
 * Practice data (train + dev): [download link](http://www.cognitiveai.org/dist/tg2021-alldata-practice.zip)
 * Evaluation period data (train + dev + test): Will be released on 2021-03-10
+
+More information about the WorldTree V2.1 corpus, including a book of explanation graphs, can be found [here](http://cognitiveai.org/explanationbank/).
 
 ## Baselines
 
