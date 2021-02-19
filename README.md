@@ -5,6 +5,8 @@ We invite participation in the 3rd Shared Task on Explanation Regeneration assoc
 
 All systems participating in the shared task will be invited to submit system description papers. Each system description paper will be peer-reviewed by (two) other participating teams and will be presented as a poster at the main workshop: https://sites.google.com/view/textgraphs2021.
 
+![Tests](https://github.com/cognitiveailab/tg2021task/workflows/Tests/badge.svg?branch=main)
+
 Overview
 ========
 Multi-hop inference is the task of combining more than one piece of information to solve an inference task, such as question answering.  This can take many forms, from combining free-text sentences read from books or the web, to combining linked facts from a structured knowledge base.  The Shared Task on Explanation Regeneration asks participants to develop methods that reconstruct large explanations for science questions, using a corpus of gold explanations that provides supervision and instrumentation for this multi-hop inference task.  Each explanation is represented as an "explanation graph", a set of atomic facts (between 1 and 16 per explanation, drawn from a knowledge base of 9,000 facts) that, together, form a detailed explanation for the reasoning required to answer and explain the resoning behind a question. 
@@ -13,12 +15,11 @@ Explanation Regeneration is a stepping-stone towards general multi-hop inference
 
 While large language models (BERT, ERNIE) achieved the highest performance in the 2019 and 2020 shared tasks, substantially advancing the state-of-the-art over previous methods, absolute performance remains modest, highlighting the difficulty of generating detailed explanations through multi-hop reasoning.
 
-*NEW FOR 2021:*
+**NEW FOR 2021:**
 Many-hop multi-hop inference is challenging because there are often multiple ways of assembling a good explanation for a given question.  This 2021 instantiation of the shared task focuses on the theme of determining relevance versus completeness in large multi-hop explanations.  To this end, this year we include a very large dataset of approximately 250,000 expert-annotated relevancy ratings for facts ranked highly by baseline language models from previous years (e.g. BERT, RoBERTa).
 
 Submissions using a variety of methods (graph-based or otherwise) are encouraged.  Submissions that evaluate how well existing models designed on 2-hop multihop question answering datasets (e.g. HotPotQA, QASC, etc) perform at many-fact multi-hop explanation regeneration are welcome.
 
-![Tests](https://github.com/cognitiveailab/tg2021task/workflows/Tests/badge.svg?branch=main)
 
 ![Example explanation graph](images/example-girl-eating-apple.jpg)
 
