@@ -1,7 +1,19 @@
 TextGraphs-15 Shared Task on Multi-Hop Inference Explanation Regeneration
 =========================================================================
 
-Multi-hop inference is the task of combining more than one piece of information to solve an inference task, such as question answering.
+We invite participation in the 3rd Shared Task on Explanation Regeneration associated with the 15th Workshop on Graph-Based Natural Language Processing (TextGraphs 2021).
+
+All systems participating in the shared task will be invited to submit system description papers. Each system description paper will be peer-reviewed by (two) other participating teams and will be presented as a poster at the main workshop: https://sites.google.com/view/textgraphs2021.
+
+Overview
+========
+
+This shared task focuses on explanation reconstruction, a stepping-stone towards general multi-hop inference over language. In particular, the inputs to this task consist of questions and their correct answers. Participating systems must extract and rank explanation sentences from a provided structured knowledge base such that the top-ranked sentences provide a complete explanation for the given answer.  This requires combining scientific and common-sense/world knowledge with compositional inference.
+
+While large language models (BERT, XLNet) achieved the highest performance in the 2019 and 2020 shared tasks, substantially advancing the state-of-the-art over previous methods, absolute performance remains modest, highlighting the difficulty of generating detailed explanations through multi-hop reasoning.
+
+*NEW FOR 2021:*
+Many-hop multi-hop inference is challenging because there are often multiple ways of assembling a good explanation for a given question.  This 2021 instantiation of the shared task focuses on the theme of determining relevance versus completeness in large multi-hop explanations.  To this end, it includes a very large dataset of approximately 250,000 expert-annotated relevancy ratings of top language model (e.g. BERT, RoBERTa) results that augment the 2020 shared task data. Submissions that evaluate how well existing models designed on 2-hop multihop question answering datasets (e.g. HotPotQA, QASC, etc) perform at many-fact multi-hop explanation regeneration are encouraged.
 
 ![Tests](https://github.com/cognitiveailab/tg2021task/workflows/Tests/badge.svg?branch=main)
 
