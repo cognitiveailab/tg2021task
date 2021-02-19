@@ -7,13 +7,16 @@ All systems participating in the shared task will be invited to submit system de
 
 Overview
 ========
+Multi-hop inference is the task of combining more than one piece of information to solve an inference task, such as question answering.  This can take many forms, from combining free-text sentences read from books or the web, to combining linked facts from a structured knowledge base.  The Shared Task on Explanation Regeneration asks participants to develop methods that reconstruct large explanations for science questions, using a corpus of gold explanations that provides supervision and instrumentation for this multi-hop inference task.  Each explanation is represented as an "explanation graph", a set of atomic facts (between 1 and 16 per explanation, drawn from a knowledge base of 9,000 facts) that, together, form a detailed explanation for the reasoning required to answer and explain the resoning behind a question. 
 
-This shared task focuses on explanation reconstruction, a stepping-stone towards general multi-hop inference over language. In particular, the inputs to this task consist of questions and their correct answers. Participating systems must extract and rank explanation sentences from a provided structured knowledge base such that the top-ranked sentences provide a complete explanation for the given answer.  This requires combining scientific and common-sense/world knowledge with compositional inference.
+Explanation Regeneration is a stepping-stone towards general multi-hop inference over language.  In this shared task we frame explanation regeneration as a ranking task, where the inputs to a given system consist of questions and their correct answers. Participating systems must then rank atomic facts from a provided semi-structured knowledge base such that the combination of top-ranked facts provide a detailed explanation for the answer.  This requires combining scientific and common-sense/world knowledge with compositional inference.
 
-While large language models (BERT, XLNet) achieved the highest performance in the 2019 and 2020 shared tasks, substantially advancing the state-of-the-art over previous methods, absolute performance remains modest, highlighting the difficulty of generating detailed explanations through multi-hop reasoning.
+While large language models (BERT, ERNIE) achieved the highest performance in the 2019 and 2020 shared tasks, substantially advancing the state-of-the-art over previous methods, absolute performance remains modest, highlighting the difficulty of generating detailed explanations through multi-hop reasoning.
 
 *NEW FOR 2021:*
-Many-hop multi-hop inference is challenging because there are often multiple ways of assembling a good explanation for a given question.  This 2021 instantiation of the shared task focuses on the theme of determining relevance versus completeness in large multi-hop explanations.  To this end, it includes a very large dataset of approximately 250,000 expert-annotated relevancy ratings of top language model (e.g. BERT, RoBERTa) results that augment the 2020 shared task data. Submissions that evaluate how well existing models designed on 2-hop multihop question answering datasets (e.g. HotPotQA, QASC, etc) perform at many-fact multi-hop explanation regeneration are encouraged.
+Many-hop multi-hop inference is challenging because there are often multiple ways of assembling a good explanation for a given question.  This 2021 instantiation of the shared task focuses on the theme of determining relevance versus completeness in large multi-hop explanations.  To this end, this year we include a very large dataset of approximately 250,000 expert-annotated relevancy ratings for facts ranked highly by baseline language models from previous years (e.g. BERT, RoBERTa).
+
+Submissions using a variety of methods (graph-based or otherwise) are encouraged.  Submissions that evaluate how well existing models designed on 2-hop multihop question answering datasets (e.g. HotPotQA, QASC, etc) perform at many-fact multi-hop explanation regeneration are welcome.
 
 ![Tests](https://github.com/cognitiveailab/tg2021task/workflows/Tests/badge.svg?branch=main)
 
@@ -32,18 +35,31 @@ Many-hop multi-hop inference is challenging because there are often multiple way
 
 Dates are specified in the ISO&nbsp;8601 format.
 
+## Data
+The data used in this shared task contains approximately 5,100 science exam questions drawn from the AI2 Reasoning Challenge (ARC) dataset ([Clark et al., 2018](https://allenai.org/data/arc)), together with explanation sentences for their correct answers drawn from the WorldTree V2.1 corpus ([Xie et al., 2020](https://www.aclweb.org/anthology/2020.lrec-1.671/), [Jansen et al., 2018](https://www.aclweb.org/anthology/L18-1433/)).  For 2021, this has been augmented with a new set of approximately 250k pre-release expert-generated relevancy ratings.
+
+The knowledge base supporting these questions contains approximately 9,000 facts. To encourage a variety of solving methods, the knowledge base is available both as plain-text sentences (unstructured) as well as semi-structured tables. Facts are a combination of scientific knowledge as well as common-sense/world knowledge.
+
+The full dataset (WorldTree V2.1 + Relevancy Ratings) can be downloaded at the following links:
+* Practice data (train + dev): [download link](http://www.cognitiveai.org/dist/tg2021-alldata-practice.zip)
+* Evaluation period data (train + dev + test): Will be released on 2021-03-10
+
 ## Baselines
 
 The shared task data distribution includes a baseline that uses a term frequency model (tf.idf) to rank how likely table row sentences are to be a part of a given explanation. The performance of this baseline on the development partition is 0.513 NDCG.
 
 ### Python
 
+First, get the data
 ```shell
-$ make dataset
+$ wget cognitiveai.org/dist/tg2021-alldata-practice.zip
+$ unzip tg2021-alldata-practice.zip
 ```
 
+Then, run the baseline
+
 ```shell
-$ ./baseline_tfidf.py tables wt-expert-ratings.dev.json > predict.txt
+$ ./baseline_tfidf.py data/tables data/wt-expert-ratings.dev.json > predict.txt
 ```
 
 The format of the `predict.txt` file is `questionID<TAB>explanationID` without header; the order is important. When [tqdm](https://github.com/tqdm/tqdm) is installed, `baseline_tfidf.py` will show a nicely-looking progress bar.
@@ -51,12 +67,12 @@ The format of the `predict.txt` file is `questionID<TAB>explanationID` without h
 To compute the NDCG for the model, run the following command:
 
 ```shell
-$ ./evaluate.py --gold wt-expert-ratings.dev.json predict.txt
+$ ./evaluate.py --gold data/wt-expert-ratings.dev.json predict.txt
 ```
 If you want to run the evaluation script without tqdm, adopt the following command:
 
 ```shell
-$ ./evaluate.py --no-tqdm --gold wt-expert-ratings.dev.json predict.txt
+$ ./evaluate.py --no-tqdm --gold data/wt-expert-ratings.dev.json predict.txt
 ```
 
 In order to prepare a submission file for CodaLab, create a ZIP file containing your `predict.txt` for the *test* dataset, cf. `make predict-tfidf-test.zip`.
