@@ -79,7 +79,9 @@ If you want to run the evaluation script without tqdm, adopt the following comma
 $ ./evaluate.py --no-tqdm --gold data/wt-expert-ratings.dev.json predict.txt
 ```
 
-In order to prepare a submission file for CodaLab, create a ZIP file containing your `predict.txt` for the *dev* dataset in Practice phase and the *test* dataset in *Evaluation* phase, cf. `make predict-tfidf-dev.zip` or `make predict-tfidf-test.zip`, correspondingly.
+In order to prepare a submission file for CodaLab, create a ZIP file containing your `predict.txt`.
+
+Dataset sample for the Practice phase can be created with `make predict-tfidf-dev.zip` using the *dev* dataset, while the one for the Evaluation phase can be created with `make predict-tfidf-test.zip` using the *test* dataset.
 
 ## Submission
 

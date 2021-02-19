@@ -4,7 +4,8 @@ https://competitions.codalab.org/competitions/29228
 
 We invite participation in the 3rd Shared Task on Explanation Regeneration
 associated with the 15th Workshop on Graph-Based Natural Language Processing
-(TextGraphs 2021).
+(TextGraphs-15).
+
 All systems participating in the shared task will be invited to submit system description papers.
 Each system description paper will be peer-reviewed by (two) other participating teams and will be
 presented as a poster at the main workshop: https://sites.google.com/view/textgraphs2021.
