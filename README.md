@@ -53,7 +53,7 @@ The shared task data distribution includes a baseline that uses a term frequency
 
 ### Python
 
-First, get the data
+First, get the data using `make dataset` or the following sequence of commands:
 ```shell
 $ wget cognitiveai.org/dist/tg2021-alldata-practice.zip
 $ unzip tg2021-alldata-practice.zip

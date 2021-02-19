@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # NDCG scoring function adapted from: https://github.com/kmbnw/rank_metrics/blob/master/python/ndcg.py
 
 import json
