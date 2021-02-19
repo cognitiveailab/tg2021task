@@ -7,19 +7,19 @@ All systems participating in the shared task will be invited to submit system de
 
 ![Tests](https://github.com/cognitiveailab/tg2021task/workflows/Tests/badge.svg?branch=main)
 
-Overview
-========
-Multi-hop inference is the task of combining more than one piece of information to solve an inference task, such as question answering.  This can take many forms, from combining free-text sentences read from books or the web, to combining linked facts from a structured knowledge base.  The Shared Task on Explanation Regeneration asks participants to develop methods that reconstruct large explanations for science questions, using a corpus of gold explanations that provides supervision and instrumentation for this multi-hop inference task.  Each explanation is represented as an "explanation graph", a set of atomic facts (between 1 and 16 per explanation, drawn from a knowledge base of 9,000 facts) that, together, form a detailed explanation for the reasoning required to answer and explain the resoning behind a question. 
+## Overview
+
+Multi-hop inference is the task of combining more than one piece of information to solve an inference task, such as question answering.  This can take many forms, from combining free-text sentences read from books or the web, to combining linked facts from a structured knowledge base.  The Shared Task on Explanation Regeneration asks participants to develop methods that reconstruct large explanations for science questions, using a corpus of gold explanations that provides supervision and instrumentation for this multi-hop inference task.  Each explanation is represented as an "explanation graph", a set of atomic facts (between 1 and 16 per explanation, drawn from a knowledge base of 9,000 facts) that, together, form a detailed explanation for the reasoning required to answer and explain the resoning behind a question.
 
 Explanation Regeneration is a stepping-stone towards general multi-hop inference over language.  In this shared task we frame explanation regeneration as a ranking task, where the inputs to a given system consist of questions and their correct answers. Participating systems must then rank atomic facts from a provided semi-structured knowledge base such that the combination of top-ranked facts provide a detailed explanation for the answer.  This requires combining scientific and common-sense/world knowledge with compositional inference.
 
 While large language models (BERT, ERNIE) achieved the highest performance in the [2019](https://www.aclweb.org/anthology/D19-5309/) and [2020](https://www.aclweb.org/anthology/2020.textgraphs-1.10/) shared tasks, substantially advancing the state-of-the-art over previous methods, absolute performance remains modest, highlighting the difficulty of generating detailed explanations through multi-hop reasoning.
 
-**NEW FOR 2021:**
+### New for 2021
+
 Many-hop multi-hop inference is challenging because there are often multiple ways of assembling a good explanation for a given question.  This 2021 instantiation of the shared task focuses on the theme of determining relevance versus completeness in large multi-hop explanations.  To this end, this year we include a very large dataset of approximately 250,000 expert-annotated relevancy ratings for facts ranked highly by baseline language models from previous years (e.g. BERT, RoBERTa).
 
 Submissions using a variety of methods (graph-based or otherwise) are encouraged.  Submissions that evaluate how well existing models designed on 2-hop multihop question answering datasets (e.g. HotPotQA, QASC, etc) perform at many-fact multi-hop explanation regeneration are welcome.
-
 
 ![Example explanation graph](images/example-girl-eating-apple.jpg)
 
@@ -41,8 +41,8 @@ The data used in this shared task contains approximately 5,100 science exam ques
 
 The knowledge base supporting these questions and their explanations contains approximately 9,000 facts. To encourage a variety of solving methods, the knowledge base is available both as plain-text sentences (unstructured) as well as semi-structured tables. Facts are a combination of scientific knowledge as well as common-sense/world knowledge.
 
-The full dataset (WorldTree V2.1 + Relevancy Ratings) can be downloaded at the following links:
-* Practice data (train + dev): [download link](http://www.cognitiveai.org/dist/tg2021-alldata-practice.zip)
+The full dataset (WorldTree V2.1  Relevancy Ratings) can be downloaded at the following links:
+* Practice data (train + dev): <http://www.cognitiveai.org/dist/tg2021-alldata-practice.zip>
 * Evaluation period data (train + dev + test): Will be released on 2021-03-10
 
 More information about the WorldTree V2.1 corpus, including a book of explanation graphs, can be found [here](http://cognitiveai.org/explanationbank/).
@@ -54,6 +54,7 @@ The shared task data distribution includes a baseline that uses a term frequency
 ### Python
 
 First, get the data using `make dataset` or the following sequence of commands:
+
 ```shell
 $ wget cognitiveai.org/dist/tg2021-alldata-practice.zip
 $ unzip tg2021-alldata-practice.zip
@@ -78,7 +79,7 @@ If you want to run the evaluation script without tqdm, adopt the following comma
 $ ./evaluate.py --no-tqdm --gold data/wt-expert-ratings.dev.json predict.txt
 ```
 
-In order to prepare a submission file for CodaLab, create a ZIP file containing your `predict.txt` for the *test* dataset, cf. `make predict-tfidf-test.zip`.
+In order to prepare a submission file for CodaLab, create a ZIP file containing your `predict.txt` for the *dev* dataset in Practice phase and the *test* dataset in *Evaluation* phase, cf. `make predict-tfidf-dev.zip` or `make predict-tfidf-test.zip`, correspondingly.
 
 ## Submission
 

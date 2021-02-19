@@ -58,7 +58,7 @@ def main():
         "--gold", type=argparse.FileType("r", encoding="UTF-8"), required=True
     )
     parser.add_argument("--no-tqdm", action="store_false", dest="tqdm")
-    parser.add_argument("pred", type=argparse.FileType("r", encoding="UTF-8")) 
+    parser.add_argument("pred", type=argparse.FileType("r", encoding="UTF-8"))
     args = parser.parse_args()
 
     preds = process_expert_pred(args.pred)

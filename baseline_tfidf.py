@@ -39,10 +39,10 @@ def read_explanations(path: str) -> List[Tuple[str, str]]:
 
 def read_questions(path: str)-> List[Tuple[str,str]]:
     questions_list = []
-    
+
     with open(path, "rb") as f:
         questions_file = json.load(f)
-    
+
     for ranking_problem in questions_file["rankingProblems"]:
         question_id = ranking_problem["qid"]
         question_text = ranking_problem["queryText"].replace("[ANSWER]","")
@@ -71,8 +71,7 @@ def main():
 
     questions = read_questions(args.questions)
 
-    #df_q = pd.read_csv(args.questions, sep='\t', dtype=str)
-    df_q = pd.DataFrame(questions, columns=('qid', 'question'))  
+    df_q = pd.DataFrame(questions, columns=('qid', 'question'))
     df_e = pd.DataFrame(explanations, columns=('uid', 'text'))
 
     vectorizer = TfidfVectorizer().fit(df_q['question']).fit(df_e['text'])
