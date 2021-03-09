@@ -43,7 +43,8 @@ The knowledge base supporting these questions and their explanations contains ap
 
 The full dataset (WorldTree V2.1  Relevancy Ratings) can be downloaded at the following links:
 * Practice data (train + dev): <http://www.cognitiveai.org/dist/tg2021-alldata-practice.zip>
-* Evaluation period data (train + dev + test): Will be released on 2021-03-10
+* Evaluation period data (train + dev + test): <http://www.cognitiveai.org/dist/tg2021-alldata-evalperiod.zip>  NOW AVAILABLE!
+
 
 More information about the WorldTree V2.1 corpus, including a book of explanation graphs, can be found [here](http://cognitiveai.org/explanationbank/).
 
