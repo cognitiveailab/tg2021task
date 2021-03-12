@@ -146,7 +146,7 @@ def ndcg(
     if len(gold) == 0:
         return 1
 
-    # Only consider relevance scores greater than 2
+    # Only consider relevance scores greater than 0
     relevance = np.array(
         [
             gold[f_id] if f_id in gold and gold[f_id] > rating_threshold else 0
