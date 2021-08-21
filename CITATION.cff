@@ -1,0 +1,36 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+- family-names: "Thayaparan"
+  given-names: "Mokanarangan"
+- family-names: "Valentino"
+  given-names: "Marco"
+- family-names: "Jansen"
+  given-names: "Peter"
+- family-names: "Ustalov"
+  given-names: "Dmitry"
+title: "TextGraphs-15 Shared Task on Multi-Hop Inference Explanation Regeneration"
+url: "https://github.com/cognitiveailab/tg2021task"
+preferred-citation:
+  type: conference-paper
+  authors:
+  - family-names: "Thayaparan"
+    given-names: "Mokanarangan"
+  - family-names: "Valentino"
+    given-names: "Marco"
+  - family-names: "Jansen"
+    given-names: "Peter"
+  - family-names: "Ustalov"
+    given-names: "Dmitry"
+  title: "TextGraphs 2021 Shared Task on Multi-Hop Inference for Explanation Regeneration"
+  year: 2021
+  collection-title: "Proceedings of the Fifteenth Workshop on Graph-Based Methods for Natural Language Processing (TextGraphs-15)"
+  collection-doi: "10.18653/v1/2021.textgraphs-1"
+  conference:
+    name: "Fifteenth Workshop on Graph-Based Methods for Natural Language Processing (TextGraphs-15)"
+    date-end: 2021-06-11
+    city: "Mexico City"
+    country: MX
+  start: 156
+  end: 165
+  url: "https://aclanthology.org/2021.textgraphs-1.17"
